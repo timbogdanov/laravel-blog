@@ -9,9 +9,11 @@
             <div class="card-body">
               <h5 class="card-title">{{ $post->title }}</h5>
               <a class="card-subtitle mb-2 text-muted" href="/profile/{{ $post->user->id }}">{{ $post->user->email }}</a>
-              <p class="card-text">{{ $post->body }}</p>
+              <p class="card-text">{{ \Illuminate\Support\Str::limit($post->body, rand(75,150), $end='...') }}</p>
 
-              <div><span class="badge bg-primary">{{ $post->category->category_name}}</span></div>
+              <div>
+                <span class="badge rounded-pill bg-info text-dark">{{ $post->category->category_name}}</span>
+              </div>
 
               <div class="d-flex justify-content-between">
                 <a href="/posts/{{ $post->id }}" class="card-link">View post</a>

@@ -10,6 +10,6 @@ class Category extends Model
     use HasFactory;
 
     public function Post() {
-        return $this->belongsTo(Post::class);
+        return $this->hasMany(Post::class);
     }
 }
