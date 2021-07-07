@@ -9,7 +9,7 @@
             <div class="card-body">
               <h5 class="card-title">{{ $post->title }}</h5>
               <span>By: <a class="card-subtitle mb-2 text-muted" href="/profile/{{ $post->user->id }}"> {{ $post->user->name }}</a></span>
-              <p class="card-text">{{ \Illuminate\Support\Str::limit($post->body, rand(75,150), $end='...') }}</p>
+              <p class="card-text">{{ \Illuminate\Support\Str::limit($post->body, 150, $end='...') }}</p>
 
               <div>
                 <a href="/categories/{{ $post->category->id }}" class="badge badge-warning">{{ $post->category->category_name}}</a>
