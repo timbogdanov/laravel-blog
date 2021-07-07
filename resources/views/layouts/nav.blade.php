@@ -31,7 +31,10 @@
           @endif
         @else
           <li class="nav-item">
-            <a class="btn btn-sm btn-dark" href="/posts/create">Create</a>
+            <a class="btn btn-md" href="/categories">Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-md btn-dark" href="/posts/create">Create Post</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -40,7 +43,7 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="">
+              <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}">
                 Profile
               </a>
               <a class="dropdown-item" href="{{ route('logout') }}"

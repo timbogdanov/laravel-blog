@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfilesController;
+use App\Http\Controllers\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +18,17 @@ use App\Http\Controllers\ProfilesController;
 
 Auth::routes();
 
-
+// Posts
 Route::get('/', [PostsController::class, 'index']);
 Route::get('/posts/create', [PostsController::class, 'create']);
 Route::post('/posts', [PostsController::class, 'store']);
 Route::delete('/posts/{post}', [PostsController::class, 'destroy']);
 Route::get('/posts/{post}', [PostsController::class, 'show']);
 
+// Categories
+Route::get('/categories', [CategoriesController::class, 'index']);
+Route::post('/categories', [CategoriesController::class, 'store']);
+Route::get('/categories/{category}', [CategoriesController::class, 'show']);
+
+// Profile
 Route::get('/profile/{user}', [ProfilesController::class, 'show']);
