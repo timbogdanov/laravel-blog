@@ -34,3 +34,5 @@ Route::get('/categories/{category}', [CategoriesController::class, 'show']);
 
 // Profile
 Route::get('/profile/{user}', [ProfilesController::class, 'show']);
+Route::post('/profile/{user}/savedposts/{savedpost}', [ProfilesController::class, 'save_post']);
+Route::delete('/profile/{user}/savedposts/{savedpost}', [ProfilesController::class, 'delete_saved_post']);

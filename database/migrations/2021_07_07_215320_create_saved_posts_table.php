@@ -15,8 +15,8 @@ class CreateSavedPostsTable extends Migration
     {
         Schema::create('saved_posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('profile_id')->nullable();
-            $table->foreign('profile_id')->references('id')->on('profiles');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedInteger('post_id')->nullable();
             $table->foreign('post_id')->references('id')->on('posts');
             $table->timestamps();

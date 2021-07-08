@@ -20,9 +20,9 @@
                 
                 <div class="d-flex">
                    @if (Auth::user())
-                    <form method="POST" action="/profile/{{ Auth::user()->id }}/{{ $post->id }}" >
+                    <form method="POST" action="/profile/{{ Auth::user()->id }}/savedposts/{{ $post->id }}" >
                       @csrf
-                      <button class="btn btn-sm btn-light">Save</button>
+                      <button class="btn btn-sm btn-light">Save for later</button>
                     </form>
                   @endif
 
