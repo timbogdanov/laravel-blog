@@ -2,6 +2,8 @@
 
 @section('content')
   <div class="container">
+    <h4>Posts</h4>
+    
     <div data-masonry='{"percentPosition": true }' class="row">
       @foreach ($posts as $post)
         <div class="col-sm-4 gx-4 mb-4">

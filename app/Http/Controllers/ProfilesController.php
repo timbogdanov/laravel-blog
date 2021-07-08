@@ -22,7 +22,7 @@ class ProfilesController extends Controller
     }
 
     public function delete_saved_post(Request $request) {
-        $savedPost = SavedPost::where(['user_id' => $request->user, 'post_id' => $request->savedpost])->first();
+        $savedPost = SavedPost::where(['user_id' => Auth::user()->id, 'post_id' => $request->savedpost])->first();
         $savedPost->delete();
         
         return redirect()->back();
