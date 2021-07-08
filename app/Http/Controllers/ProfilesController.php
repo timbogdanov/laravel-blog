@@ -32,7 +32,7 @@ class ProfilesController extends Controller
     public function show($id) {
         $profile = Profile::where('user_id', $id)->first();
         $posts = Post::where('user_id', $id )->orderBy('created_at', 'DESC')->get();
-        $savedPosts = SavedPost::where('user_id', $id)->get();
+        $savedPosts = SavedPost::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
 
         return view('profiles.show')->with(['profile' => $profile, 'posts' => $posts, 'savedPosts' => $savedPosts]);
     }

@@ -69,19 +69,21 @@
                 <a href="/posts/{{ $savedPost->post->id }}" class="card-link">View post</a>
                 
                 @if (Auth::user())
-                <form method="POST" action="/profile/{{ Auth::user()->id }}/savedposts/{{ $savedPost->post->id }}" >
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-sm btn-light">Remove from saved</button>
-                </form>
-
-                  @if (Auth::user()->id == $savedPost->post->user_id)
-                    <form method="post" action="/posts/{{ $savedPost->post->id }}">
+                  <div class="btn-group">
+                    <form method="POST" action="/profile/{{ Auth::user()->id }}/savedposts/{{ $savedPost->post->id }}" >
                       @csrf
                       @method('DELETE')
-                      <button class="btn btn-sm btn-danger">Delete</button>
+                      <button class="btn btn-sm btn-light">Remove from saved</button>
                     </form>
-                  @endif
+
+                    @if (Auth::user()->id == $savedPost->post->user_id)
+                      <form method="post" action="/posts/{{ $savedPost->post->id }}">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                      </form>
+                    @endif
+                  </div>
                 @endif
               </div>
             </div>
