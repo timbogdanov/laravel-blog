@@ -30,7 +30,9 @@
 
         @foreach ($comments as $comment)
           <div class="col-sm-12">
+            <a href="/profile/{{ $comment->user->id }}">{{ $comment->user->name }}</a>
             <p>{{ $comment->body }}</p>
+
           </div>
         @endforeach
       </div>
