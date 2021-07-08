@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Comment;
 
 use Auth;
 
@@ -35,8 +36,9 @@ class PostsController extends Controller
     
     public function show($id) {
         $post = Post::where('id', $id)->first();
-
-        return view('posts.show')->with('post', $post);
+        $comments = Comment::where('post_id', $id)->get();
+            
+        return view('posts.show')->with(['post' => $post, 'comments' => $comments]);
     }
 
     public function destroy($id) {
