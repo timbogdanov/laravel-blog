@@ -2,8 +2,10 @@
 
 @section('content')
   <div class="container">
+    <h4>Posts</h4>
+
     <div data-masonry='{"percentPosition": true }' class="row">
-      @foreach ($posts as $post)
+      @forelse ($posts as $post)
         <div class="col-sm-4 gx-4 mb-4">
           <div class="card">
             <div class="card-body">
@@ -19,26 +21,30 @@
                 <a href="/posts/{{ $post->id }}" class="card-link">View post</a>
                 
                 <div class="d-flex">
-                   @if (Auth::user())
-                    <form method="POST" action="/profile/{{ Auth::user()->id }}/{{ $post->id }}" >
-                      @csrf
-                      <button class="btn btn-sm btn-light">Save</button>
-                    </form>
+                  @if (Auth::user())
+                  <form method="POST" action="/profile/{{ Auth::user()->id }}/savedposts/{{ $post->id }}" >
+                    @csrf
+                    <button class="btn btn-sm btn-light">Save for later</button>
+                  </form>
                   @endif
 
                   @if (Auth::user() && Auth::user()->id == $post->user_id)
-                  <form method="POST" action="/posts/{{ $post->id }}">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-sm btn-danger">Delete</button>
-                  </form>
+                    <form method="POST" action="/posts/{{ $post->id }}">
+                      @csrf
+                      @method('DELETE')
+                      <button class="btn btn-sm btn-danger">Delete</button>
+                    </form>
                   @endif
                 </div>
               </div>
             </div>
           </div>
         </div>
-      @endforeach
+      @empty
+        <div class="col-sm-4 mb-4">
+          <p class="badge badge-danger">No posts to show</p>
+        </div> 
+      @endforelse
     </div>
   </div>
 @endsection

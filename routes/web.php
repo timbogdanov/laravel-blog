@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CommentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::get('/posts/create', [PostsController::class, 'create']);
 Route::post('/posts', [PostsController::class, 'store']);
 Route::delete('/posts/{post}', [PostsController::class, 'destroy']);
 Route::get('/posts/{post}', [PostsController::class, 'show']);
+Route::post('/posts/{post}/comments', [CommentsController::class, 'store']);
 
 // Categories
 Route::get('/categories', [CategoriesController::class, 'index']);
@@ -32,3 +34,5 @@ Route::get('/categories/{category}', [CategoriesController::class, 'show']);
 
 // Profile
 Route::get('/profile/{user}', [ProfilesController::class, 'show']);
+Route::post('/profile/{user}/savedposts/{savedpost}', [ProfilesController::class, 'save_post']);
+Route::delete('/profile/{user}/savedposts/{savedpost}', [ProfilesController::class, 'delete_saved_post']);

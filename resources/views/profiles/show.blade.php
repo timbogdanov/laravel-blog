@@ -8,7 +8,7 @@
         <p class="text-muted">{{ $profile->user->email }}</p>
       </div>
       
-      @if (Auth::user()->id != $profile->user->id)
+      @if (Auth::user() && Auth::user()->id != $profile->user->id)
         <div class="col-sm-6 text-right">
           <form action="" method="post">
             @csrf
@@ -18,8 +18,9 @@
       @endif
     </div>
 
+    <h5>Posts</h5>
     <div data-masonry='{"percentPosition": true }' class="row">
-      @foreach ($posts as $post)
+      @forelse ($posts as $post)
         <div class="col-sm-4 mb-4">
           <div class="card">
             <div class="card-body">
@@ -46,7 +47,51 @@
             </div>
           </div>
         </div>
-      @endforeach
+      @empty
+        <div class="col-sm-4 mb-4">
+          <p class="badge badge-danger">No posts to show</p>
+        </div> 
+      @endforelse
+    </div>
+
+    
+    <h5>Saved for later</h5>
+    <div data-masonry='{"percentPosition": true }' class="row">
+      @forelse ($savedPosts as $savedPost)
+        <div class="col-sm-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ $savedPost->post->title }}</h5>
+              <span>By: <a class="card-subtitle mb-2 text-muted" href="/profile/{{ $savedPost->post->user->id }}">{{ $savedPost->post->user->name }}</a></span>
+              <p class="card-text">{{ \Illuminate\Support\Str::limit($savedPost->post->body, 150, $end='...') }}</p>
+
+              <div>
+                <a href="/categories/{{ $savedPost->post->category->id }}" class="badge badge-warning">{{ $savedPost->post->category->category_name}}</a>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <a href="/posts/{{ $savedPost->post->id }}" class="card-link">View post</a>
+                
+                @if (Auth::user())
+                  <div class="btn-group">
+                    @if (Auth::user()->id == $savedPost->user->id)
+                      <form method="POST" action="/profile/{{ Auth::user()->id }}/savedposts/{{ $savedPost->post->id }}" >
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-sm btn-light">Remove from saved</button>
+                      </form>
+                    @endif
+                  </div>
+                @endif
+              </div>
+            </div>
+          </div>
+        </div>
+      @empty
+        <div class="col-sm-4 mb-4">
+          <p class="badge badge-danger">No posts saved for later</p>
+        </div> 
+      @endforelse
     </div>
   </div>
 @endsection
