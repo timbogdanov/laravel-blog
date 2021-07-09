@@ -5,6 +5,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ use App\Http\Controllers\CommentsController;
 |
 */
 
+// User
 Auth::routes();
 
 // Posts
@@ -36,3 +38,5 @@ Route::get('/categories/{category}', [CategoriesController::class, 'show']);
 Route::get('/profile/{user}', [ProfilesController::class, 'show']);
 Route::post('/profile/{user}/savedposts/{savedpost}', [ProfilesController::class, 'save_post']);
 Route::delete('/profile/{user}/savedposts/{savedpost}', [ProfilesController::class, 'delete_saved_post']);
+Route::post('/profile/{id}/addfriend', [UserController::class, 'add_friend']);
+Route::post('/profile/{id}/removefriend', [UserController::class, 'remove_friend']);
