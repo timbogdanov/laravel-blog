@@ -28,21 +28,32 @@
                
                 <h5>{{ $profile->user->name }}</h5>
                 <p class="text-muted mb-0">{{ $profile->user->email }}</p>
+
+                @if ($profile->user->email_verified_at)
+                  <span class="badge bg-dark text-white">Verified account</span>
+                @endif
               </div>
 
               @if (Auth::user())
                 <div class="col-sm-6 text-right">
 
                   @if (Auth::user()->id != $profile->user->id)
-                    <form action="/profile/{{ $profile->user->id }}/addfriend" method="post">
-                      @csrf
+                    
 
-
-                        <button class="btn btn-primary btn-sm" type="submit">Unfollow</button>
-
-                        <button class="btn btn-primary btn-sm" type="submit">Follow</button>
-
-                    </form>
+                      @if (Auth::user()->does_follow($profile->user->id))
+                        <form action="/profile/{{ $profile->user->id }}/removefriend" method="post">
+                          @csrf  
+                          <button class="btn btn-danger btn-sm" type="submit">Unfollow</button>
+                        </form>
+                        
+                      @else
+                        <form action="/profile/{{ $profile->user->id }}/addfriend" method="post">
+                          @csrf  
+                          <button class="btn btn-primary btn-sm" type="submit">Follow</button>
+                        </form>
+                        
+                      @endif
+                    
                   @endif
                 </div>
               @endif
