@@ -10,10 +10,13 @@
             <div class="col-3">
               <label for="">Category name</label>
               <input type="text" class="form-control" name="category_name"></input>
+            </div>
+            <div class="col-3">
               <label for="">Category description</label>
               <input type="text" class="form-control" name="description"></input>
-              <button class="btn btn-sm btn-success">Create category</button>
             </div>
+            <hr>
+            <button class="btn btn-sm btn-success">Create category</button>
           </form>
         </div>
       </div>
