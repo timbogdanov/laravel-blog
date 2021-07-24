@@ -31,6 +31,9 @@
           @endif
         @else
           <li class="nav-item">
+            <a class="btn btn-md" href="/accounts/import">Import Accounts</a>
+          </li>
+          <li class="nav-item">
             <a class="btn btn-md" href="/categories">Categories</a>
           </li>
           <li class="nav-item">

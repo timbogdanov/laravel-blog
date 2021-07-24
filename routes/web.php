@@ -19,7 +19,13 @@ use App\Http\Controllers\UserController;
 */
 
 // User
-Auth::routes();
+Auth::routes(['verify' => true]);
+
+Route::post('/email/verification-notification', function (Request $request) {
+    Auth::user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 // Posts
 Route::get('/', [PostsController::class, 'index']);
@@ -38,5 +44,5 @@ Route::get('/categories/{category}', [CategoriesController::class, 'show']);
 Route::get('/profile/{user}', [ProfilesController::class, 'show']);
 Route::post('/profile/{user}/savedposts/{savedpost}', [ProfilesController::class, 'save_post']);
 Route::delete('/profile/{user}/savedposts/{savedpost}', [ProfilesController::class, 'delete_saved_post']);
-Route::post('/profile/{id}/addfriend', [UserController::class, 'add_friend']);
-Route::post('/profile/{id}/removefriend', [UserController::class, 'remove_friend']);
+Route::post('/profile/{id}/addfriend', [ProfilesController::class, 'add_friend']);
+Route::post('/profile/{id}/removefriend', [ProfilesController::class, 'remove_friend']);

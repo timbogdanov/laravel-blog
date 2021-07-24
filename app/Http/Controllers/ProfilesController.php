@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\Post;
 use App\Models\SavedPost;
+use App\Models\User;
+
+use Illuminate\Support\Facades\DB;
 
 use Auth;
 
@@ -27,13 +30,26 @@ class ProfilesController extends Controller
         
         return redirect()->back();
     }
-
     
     public function show($id) {
         $profile = Profile::where('user_id', $id)->first();
         $posts = Post::where('user_id', $id )->orderBy('created_at', 'DESC')->get();
         $savedPosts = SavedPost::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
 
+
+
+        // dd($followsUser);
+
         return view('profiles.show')->with(['profile' => $profile, 'posts' => $posts, 'savedPosts' => $savedPosts]);
+    }
+
+    public function add_friend($id) {
+        $addUser = Auth()->user()->friends()->attach([$id]);
+        return redirect()->back();
+    }
+
+    public function remove_friend($id) {
+        $removeUser = Auth()->user()->friends()->detach([$id]);
+        return redirect()->back();
     }
 }
