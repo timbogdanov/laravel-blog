@@ -18,16 +18,23 @@ use App\Http\Controllers\UserController;
 |
 */
 
-// User
+/*
+|--------------------------------------------------------------------------
+| User
+|--------------------------------------------------------------------------
+*/
 Auth::routes(['verify' => true]);
-
 Route::post('/email/verification-notification', function (Request $request) {
     Auth::user()->sendEmailVerificationNotification();
 
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-// Posts
+/*
+|--------------------------------------------------------------------------
+| Posts
+|--------------------------------------------------------------------------
+*/
 Route::get('/', [PostsController::class, 'index']);
 Route::get('/posts/create', [PostsController::class, 'create']);
 Route::post('/posts', [PostsController::class, 'store']);
@@ -35,12 +42,20 @@ Route::delete('/posts/{post}', [PostsController::class, 'destroy']);
 Route::get('/posts/{post}', [PostsController::class, 'show']);
 Route::post('/posts/{post}/comments', [CommentsController::class, 'store']);
 
-// Categories
+/*
+|--------------------------------------------------------------------------
+| Categories
+|--------------------------------------------------------------------------
+*/
 Route::get('/categories', [CategoriesController::class, 'index']);
 Route::post('/categories', [CategoriesController::class, 'store']);
 Route::get('/categories/{category}', [CategoriesController::class, 'show']);
 
-// Profile
+/*
+|--------------------------------------------------------------------------
+| Profile
+|--------------------------------------------------------------------------
+*/
 Route::get('/profile/{user}', [ProfilesController::class, 'show']);
 Route::post('/profile/{user}/savedposts/{savedpost}', [ProfilesController::class, 'save_post']);
 Route::delete('/profile/{user}/savedposts/{savedpost}', [ProfilesController::class, 'delete_saved_post']);
