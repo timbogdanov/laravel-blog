@@ -1,14 +1,7 @@
 <nav class="navbar">
   <!-- Navbar nav -->
   <ul class="navbar-nav mr-auto">
-    <div class="input-group">
-      <form action="/accounts" method="get" class="d-flex">
-        <input type="text" name="search_account" class="form-control" placeholder="Search accounts">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="submit">Search</button>
-        </div>
-      </form>
-    </div>
+    
   </ul>
 
   <ul class="navbar-nav ml-auto">

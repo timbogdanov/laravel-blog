@@ -7,11 +7,12 @@
         <div class="card-body">
           <form class="form-horizontal" method="post" action="/accounts" enctype="multipart/form-data">
             @csrf
-
-            <div class="form-group">
-              <input type="file" name="file">
-              <button type="submit" class="btn btn-primary">Import</button>
+            <div class="custom-file">
+              <input type="file" name="file" id="file-input-1">
+              <label for="file-input-1">Choose a file</label>
             </div>
+
+            <button type="submit" class="btn btn-primary">Import</button>
           </form>
         </div>
       </div>

@@ -7,7 +7,11 @@
     </a>
     <!-- Sidebar content with the search box -->
     <div class="sidebar-content">
-      <input type="text" class="form-control" placeholder="Search">
+
+      <form action="/accounts" method="get" class="d-flex">
+        <input type="text" name="search_account" class="form-control" placeholder="Search accounts">
+      </form>
+      
       <div class="mt-10 font-size-12"> <!-- mt-10 = margin-top: 1rem (10px), font-size-12 = font-size: 1.2rem (12px) -->
         Press <kbd>/</kbd> to focus
       </div>
