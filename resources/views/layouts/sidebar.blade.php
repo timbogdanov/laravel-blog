@@ -3,7 +3,7 @@
     <!-- Sidebar brand -->
     <a href="/" class="sidebar-brand">
       <img src="" alt="">
-      Laravel
+      Collections
     </a>
     <!-- Sidebar content with the search box -->
     <div class="sidebar-content">
@@ -11,22 +11,22 @@
       <form action="/accounts" method="get" class="d-flex">
         <input type="text" name="search_account" class="form-control" placeholder="Search accounts">
       </form>
-      
-      <div class="mt-10 font-size-12"> <!-- mt-10 = margin-top: 1rem (10px), font-size-12 = font-size: 1.2rem (12px) -->
+
+      <div class="mt-10 font-size-12">
         Press <kbd>/</kbd> to focus
       </div>
     </div>
     <!-- Sidebar links and titles -->
-    <h5 class="sidebar-title">Getting started</h5>
+    <h5 class="sidebar-title font-size-12 text-uppercase">General</h5>
     <div class="sidebar-divider"></div>
-    <a href="#" class="sidebar-link active">Installation</a>
-    <a href="#" class="sidebar-link">CLI commands</a>
+    <a href="#" class="sidebar-link active">Dashboard</a>
+    <a href="#" class="sidebar-link">Search</a>
     <br />
-    <h5 class="sidebar-title">Components</h5>
+    <h5 class="sidebar-title font-size-12 text-uppercase">Admin Controls</h5>
     <div class="sidebar-divider"></div>
-    <a href="#" class="sidebar-link">File explorer</a>
-    <a href="#" class="sidebar-link">Spreadsheet</a>
-    <a href="#" class="sidebar-link">Map</a>
-    <a href="#" class="sidebar-link">Messenger</a>
+    <a href="#" class="sidebar-link">Import Accounts</a>
+    <a href="#" class="sidebar-link">Account Distribution</a>
+    <a href="#" class="sidebar-link">Team</a>
+    <a href="#" class="sidebar-link">Payments</a>
   </div>
 </div>
