@@ -66,4 +66,8 @@ class User extends Authenticatable implements MustVerifyEmail
         if ($friend_user != null) return true;
         else return false;
     }
+
+    public function account() {
+        return $this->hasMany(Account::class);
+    }
 }

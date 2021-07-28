@@ -1,17 +1,24 @@
 
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
   <div class="container">
-    <a class="navbar-brand" href="{{ url('/') }}">
-      {{ config('app.name', 'Laravel') }}
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+   
       <!-- Left Side Of Navbar -->
-      <ul class="navbar-nav mr-auto">
-        
+      <ul class="navbar-nav mr-auto d-flex align-items-center">
+        <a class="navbar-brand" href="{{ url('/') }}">
+          {{ config('app.name', 'Laravel') }}
+        </a>
+
+        <div class="input-group">
+          <form action="/accounts" method="get" class="d-flex">
+            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Search by:</button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Account number</a></li>
+            </ul>
+            <input type="text" name="search_account" class="form-control" placeholder="Search accounts" aria-label="Search accounts" aria-describedby="search-accounts">
+            <button class="btn btn-sm btn-primary" type="submit" id="search-accounts">Search</button>
+          </form>
+        </div>
+  
       </ul>
 
       <!-- Right Side Of Navbar -->
@@ -62,6 +69,6 @@
           </li>
         @endguest
       </ul>
-    </div>
+
   </div>
 </nav>

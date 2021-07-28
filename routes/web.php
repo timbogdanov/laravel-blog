@@ -78,4 +78,4 @@ Route::group(['prefix' => 'profile'], function () {
 */
 Route::get('/accounts', [AccountsController::class, 'accounts']);
 Route::post('/accounts', [AccountsController::class, 'import_accounts']);
-Route::get('/accounts/{account}', [AccountsController::class, 'show_account']);
+Route::get('/account/{account}', [AccountsController::class, 'show_account']);

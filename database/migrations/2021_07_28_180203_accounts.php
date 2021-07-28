@@ -19,7 +19,9 @@ class Accounts extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('account')->nullable();
-            $table->decimal('amount_owed', 8, 2)->nullable();
+            $table->integer('amount_owed')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
