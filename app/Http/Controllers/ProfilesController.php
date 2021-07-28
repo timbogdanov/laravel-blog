@@ -36,10 +36,6 @@ class ProfilesController extends Controller
         $posts = Post::where('user_id', $id )->orderBy('created_at', 'DESC')->get();
         $savedPosts = SavedPost::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
 
-
-
-        // dd($followsUser);
-
         return view('profiles.show')->with(['profile' => $profile, 'posts' => $posts, 'savedPosts' => $savedPosts]);
     }
 
