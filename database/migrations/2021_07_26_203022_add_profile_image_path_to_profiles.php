@@ -9,7 +9,7 @@ class AddProfileImagePathToProfiles extends Migration
     public function up()
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->string('file_path');
+            $table->string('file_path')->nullable();
         });
     }
 

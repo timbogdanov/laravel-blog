@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 use Auth;
 
-class ProfilesController extends Controller
-{
+class ProfilesController extends Controller {
     
     public function save_post(Request $request) {
         $savedPost = SavedPost::create([
@@ -36,10 +35,6 @@ class ProfilesController extends Controller
         $posts = Post::where('user_id', $id )->orderBy('created_at', 'DESC')->get();
         $savedPosts = SavedPost::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
 
-
-
-        // dd($followsUser);
-
         return view('profiles.show')->with(['profile' => $profile, 'posts' => $posts, 'savedPosts' => $savedPosts]);
     }
 
@@ -51,5 +46,26 @@ class ProfilesController extends Controller
     public function remove_friend($id) {
         $removeUser = Auth()->user()->friends()->detach([$id]);
         return redirect()->back();
+    }
+
+    public function upload_profile_image(Request $request) {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $imageName = time().'.'.$request->image->extension();  
+
+        $request->image->move(public_path('images'), $imageName);
+        
+
+        // dd($request->id);
+
+        $profile = Profile::where('user_id', $request->id)->update([
+            'file_path' => $imageName
+        ]);
+
+        return back()
+            ->with('success','You have successfully upload image.')
+            ->with('image',$imageName); 
     }
 }

@@ -46,3 +46,4 @@ Route::post('/profile/{user}/savedposts/{savedpost}', [ProfilesController::class
 Route::delete('/profile/{user}/savedposts/{savedpost}', [ProfilesController::class, 'delete_saved_post']);
 Route::post('/profile/{id}/addfriend', [ProfilesController::class, 'add_friend']);
 Route::post('/profile/{id}/removefriend', [ProfilesController::class, 'remove_friend']);
+Route::post('/profile/{id}/upload-profile-image', [ ProfilesController::class, 'upload_profile_image' ]);

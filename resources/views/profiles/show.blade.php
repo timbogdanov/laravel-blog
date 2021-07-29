@@ -7,7 +7,7 @@
       <div class="col-sm-12">
         <div class="card">
           <div class="card-body">
-            @if (Auth::user()->email_verified_at == null)
+            @if (Auth::user() && Auth::user()->id == $profile->user->id && Auth::user()->email_verified_at == null)
               <div class="alert alert-warning" role="alert">
                 <div class="d-flex justify-content-between">
                   <span>
@@ -24,40 +24,47 @@
               </div>
             @endif
             <div class="row d-flex justify-content-between align-items-center">
-              <div class="col-sm-6">
-               
-                <h5>{{ $profile->user->name }}</h5>
-                <p class="text-muted mb-0">{{ $profile->user->email }}</p>
-
-                @if ($profile->user->email_verified_at)
-                  <span class="badge bg-dark text-white">Verified account</span>
+              <div class="col-sm-3 d-flex justify-content-between align-items-center">
+                <img src="{{ asset('images') }}/{{ $profile->file_path }}" class="rounded w-25 img-thumbnail" alt="profile-image">
+                @if (Auth::user() && Auth::user()->id == $profile->user->id)
+                  <div>
+                    <form action="/profile/{{ Auth::user()->id }}/upload-profile-image" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <div class="row">
+                        <input type="file" name="image" class="form-control">
+                        <button type="submit" class="btn btn-sm btn-success">Upload</button>
+                      </div>
+                    </form>
+                  </div>
                 @endif
-              </div>
-
-              @if (Auth::user())
-                <div class="col-sm-6 text-right">
-
-                  @if (Auth::user()->id != $profile->user->id)
-                    
-
-                      @if (Auth::user()->does_follow($profile->user->id))
-                        <form action="/profile/{{ $profile->user->id }}/removefriend" method="post">
-                          @csrf  
-                          <button class="btn btn-danger btn-sm" type="submit">Unfollow</button>
-                        </form>
-                        
-                      @else
-                        <form action="/profile/{{ $profile->user->id }}/addfriend" method="post">
-                          @csrf  
-                          <button class="btn btn-primary btn-sm" type="submit">Follow</button>
-                        </form>
-                        
-                      @endif
-                    
+               
+                <div>
+                  <h5>{{ $profile->user->name }}</h5>
+                  <p class="text-muted mb-0">{{ $profile->user->email }}</p>
+  
+                  @if ($profile->user->email_verified_at)
+                    <i class="bi bi-patch-check-fill mr-1"></i><span>Email verified</span>
                   @endif
                 </div>
-              @endif
+              </div>
 
+              <div class="col-sm-6 text-right">
+                @if (Auth::user() && Auth::user()->id != $profile->user->id)
+                    @if (Auth::user()->does_follow($profile->user->id))
+                      <form action="/profile/{{ $profile->user->id }}/removefriend" method="post">
+                        @csrf  
+                        <button class="btn btn-danger btn-sm" type="submit">Unfollow</button>
+                      </form>
+                      
+                    @else
+                      <form action="/profile/{{ $profile->user->id }}/addfriend" method="post">
+                        @csrf  
+                        <button class="btn btn-primary btn-sm" type="submit">Follow</button>
+                      </form>
+                      
+                    @endif
+                @endif
+              </div>
             </div>
           </div>
         </div>
@@ -77,13 +84,15 @@
                       <a href="{{ $friend->id }}" class="card-title">{{ $friend->name }}</a>
                       <p class="text-muted mb-0">{{ $friend->email }}</p>
                     </div>
-
-                    <div class="col-sm-4 text-right">
-                      <form action="/profile/{{ $friend->id }}/removefriend" method="post">
-                        @csrf
-                        <button class="btn btn-danger btn-sm" type="submit">Unfollow</button>
-                      </form>
-                    </div>
+                    
+                    @if (Auth::user() && Auth::user()->id == $profile->user->id)
+                      <div class="col-sm-4 text-right">
+                        <form action="/profile/{{ $friend->id }}/removefriend" method="post">
+                          @csrf
+                          <button class="btn btn-danger btn-sm" type="submit">Unfollow</button>
+                        </form>
+                      </div>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -156,18 +165,16 @@
 
                   <div class="d-flex justify-content-between">
                     <a href="/posts/{{ $savedPost->post->id }}" class="card-link">View post</a>
-                    
-                    @if (Auth::user())
-                      <div class="btn-group">
-                        @if (Auth::user()->id == $savedPost->user->id)
-                          <form method="POST" action="/profile/{{ Auth::user()->id }}/savedposts/{{ $savedPost->post->id }}" >
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-sm btn-light">Remove from saved</button>
-                          </form>
-                        @endif
-                      </div>
-                    @endif
+                  
+                    <div class="btn-group">
+                      @if (Auth::user() && Auth::user()->id == $savedPost->user->id)
+                        <form method="POST" action="/profile/{{ Auth::user()->id }}/savedposts/{{ $savedPost->post->id }}" >
+                          @csrf
+                          @method('DELETE')
+                          <button class="btn btn-sm btn-light">Remove from saved</button>
+                        </form>
+                      @endif
+                    </div>
                   </div>
                 </div>
               </div>
