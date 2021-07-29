@@ -5,9 +5,16 @@
       <img src="" alt="">
       Collections
     </a>
+    <br />
+    <a href="/profile/{{ Auth::user()->id }}" class="sidebar-link sidebar-link-with-icon active">
+      <span class="sidebar-icon">
+        <i class="bi bi-person-fill"></i>
+      </span>
+      {{ Auth::user()->name }}
+    </a>
+
     <!-- Sidebar content with the search box -->
     <div class="sidebar-content">
-
       <form action="/accounts" method="get" class="d-flex">
         <input type="text" name="search_account" class="form-control" placeholder="Search accounts">
       </form>
